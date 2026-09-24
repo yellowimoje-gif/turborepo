@@ -1,8 +1,6 @@
 import { cacheLife } from "next/cache";
 import { REMOTE_CACHE_COUNTER_START_HOURS } from "@/components/remote-cache-counter/constants";
 
-export const pathKey = `https://api.us-east.tinybird.co/v0/pipes/turborepo_time_saved_ticker.json?token=${process.env.TINYBIRD_TIME_SAVED_TOKEN}`;
-
 interface QueryResponse {
   meta: Array<{ name: string; type: string }>;
   data: Array<{
@@ -39,6 +37,7 @@ export const getRemoteCacheSavedMinutes =
       };
     }
 
+    const pathKey = `https://api.us-east.tinybird.co/v0/pipes/turborepo_time_saved_ticker.json?token=${process.env.TINYBIRD_TIME_SAVED_TOKEN}`;
     const raw = await fetch(pathKey).then(
       (res) => res.json() as unknown as QueryResponse
     );
